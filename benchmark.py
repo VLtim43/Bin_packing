@@ -49,47 +49,49 @@ def benchmark_algorithms(sizes, trials=50):
     return results
 
 
-def plot_all_metrics(results):
-    fig, axs = plt.subplots(3, 1, figsize=(10, 14))
-
+def plot_time_complexity(results):
+    plt.figure(figsize=(10, 5))
     for name, data in results.items():
-        axs[0].plot(
-            data['n'],
-            data['time'],
-            label=name,
-        )
-    axs[0].set_title("Time Complexity vs Number of Items")
-    axs[0].set_xlabel("Number of items (n)")
-    axs[0].set_ylabel("Average Execution Time (s)")
-    axs[0].legend()
-    axs[0].grid(True)
-
-    for name, data in results.items():
-        axs[1].plot(
-            data['n'],
-            data['bins'],
-            label=name,
-        )
-    axs[1].set_title("Bin Usage")
-    axs[1].set_xlabel("Number of items (n)")
-    axs[1].set_ylabel("Average Number of Bins Used")
-    axs[1].legend()
-    axs[1].grid(True)
-
-    for name, data in results.items():
-        axs[2].plot(
-            data['n'],
-            data['utilization'],
-            label=name,
-        )
-    axs[2].set_title("Bin Space Utilization")
-    axs[2].set_xlabel("Number of items (n)")
-    axs[2].set_ylabel("Average Utilization (0 to 1)")
-    axs[2].legend()
-    axs[2].grid(True)
-
+        plt.plot(data['n'], data['time'], label=name)
+    plt.title("Time Complexity vs Number of Items")
+    plt.xlabel("Number of items (n)")
+    plt.ylabel("Average Execution Time (s)")
+    plt.legend()
+    plt.grid(True)
     plt.tight_layout()
     plt.show()
+
+
+def plot_bin_usage(results):
+    plt.figure(figsize=(10, 5))
+    for name, data in results.items():
+        plt.plot(data['n'], data['bins'], label=name)
+    plt.title("Bin Usage")
+    plt.xlabel("Number of items (n)")
+    plt.ylabel("Average Number of Bins Used")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_space_utilization(results):
+    plt.figure(figsize=(10, 5))
+    for name, data in results.items():
+        plt.plot(data['n'], data['utilization'], label=name)
+    plt.title("Bin Space Utilization")
+    plt.xlabel("Number of items (n)")
+    plt.ylabel("Average Utilization (0 to 1)")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_all_metrics(results):
+    plot_time_complexity(results)
+    plot_bin_usage(results)
+    plot_space_utilization(results)
 
 
 if __name__ == "__main__":
